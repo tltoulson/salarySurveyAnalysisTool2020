@@ -1,8 +1,10 @@
 export { predictTraditionalModel }
 
+// Updated the model with the field names used in the 2021 survey
+// to test the 2020 model against 2021 data
 function predictTraditionalModel(response) {
     var lookup = {
-        'United States ': {
+        'United States': {
             'ServiceNow Developer/Programmer': [
                 [3, 107600],
                 [7, 96512],
@@ -214,8 +216,8 @@ function predictTraditionalModel(response) {
     };
 
     var country = response['Country'];
-    var role = response['Current Job Role'];
-    var exp = response['Years of Experience - Total'];
+    var role = response['Which of the following best describes your current job role?'];
+    var exp = response['Total Experience'];
 
     var lookupCountry = lookup[country];
     var lookupRole;

@@ -12,7 +12,7 @@ import * as PropertyTree from './components/propertyTree.js';
 import * as Filter from './components/filter.js';
 import * as SalaryTable from './components/salaryTable.js';
 
-import { calculatePermutationImportance, calculateModelMAPE } from './validation/index.js';
+import { calculatePermutationImportance, calculateModelMAPE, calculateModelMdAPE } from './validation/index.js';
 import { predictModel1 } from './validation/predictModel1.js';
 import { predictModel2 } from './validation/predictModel2.js';
 import { predictTop3SN } from './validation/predictTop3SN.js';
@@ -148,6 +148,7 @@ store.dispatch(Actions.appLoaded());
 window.store = store;
 window.calculatePermutationImportance = calculatePermutationImportance;
 window.calculateModelMAPE = calculateModelMAPE;
+window.calculateModelMdAPE = calculateModelMdAPE;
 window.predictModel1 = predictModel1;
 window.predictModel2 = predictModel2;
 window.predictTop3SN = predictTop3SN;

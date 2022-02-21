@@ -1,7 +1,8 @@
-export { calculatePermutationImportance, calculateModelMAPE };
+export { calculatePermutationImportance, calculateModelMAPE, calculateModelMdAPE };
 import { targetProperty } from '../data/responses.js';
 import { getProcessedResponses } from '../data/responseProcessing.js';
 import {responseInput} from '../config/responseInput.js';
+import { calculateQuartile } from '../lib/variance.js';
 import { predictModel1 } from './predictModel1.js';
 
 var significantProperties = [
@@ -165,11 +166,11 @@ function calculateMAPE(responses, predict) {
     var sumAPE;
 
     responses.forEach(function(response) {
-        //console.log(response[targetProperty] + '        ' + predict(response) + '       ' + response['Country'] + '       ' + response['Years of Experience - IT']);
+        //console.log(response[targetProperty] + '        ' + predict(response) + '       ' + response['Country'] + '       ' + response['IT Experience']);
         absolutePercentErrors.push({
             'value': Math.abs(response[targetProperty] - predict(response)) / response[targetProperty],
             'country': response['Country'],
-            'exp': response['Years of Experience - Total']
+            'exp': response['Total Experience']
         });
     });
 
@@ -180,6 +181,24 @@ function calculateMAPE(responses, predict) {
     }, 0);
 
     return sumAPE / absolutePercentErrors.length;
+}
+
+function calculateMdAPE(responses, predict) {
+    var absolutePercentErrors = [];
+    var sumAPE;
+
+    responses.forEach(function(response) {
+        //console.log(response[targetProperty] + '        ' + predict(response) + '       ' + response['Country'] + '       ' + response['IT Experience']);
+        absolutePercentErrors.push({
+            'value': Math.abs(response[targetProperty] - predict(response)) / response[targetProperty],
+            'country': response['Country'],
+            'exp': response['Total Experience']
+        });
+    });
+
+    //console.log(absolutePercentErrors.map(function(item) { return item.country + '\t' + item.exp + '\t' + item.value; }).join('\n'));
+
+    return calculateQuartile(absolutePercentErrors.map((next) => next.value), 0.5);
 }
 
 function shuffle(responses, property) {
@@ -223,4 +242,11 @@ function calculateModelMAPE(predictionModel) {
     var responses = getProcessedResponses(responseInput);
 
     return calculateMAPE(responses, predict);
+}
+
+function calculateModelMdAPE(predictionModel) {
+    var predict = generatePredict(predictionModel);
+    var responses = getProcessedResponses(responseInput);
+
+    return calculateMdAPE(responses, predict);
 }

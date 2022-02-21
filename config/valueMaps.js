@@ -46,6 +46,19 @@ var valueMaps = {
         'Prefer not to disclose': 2 // Highest probability is Intermediate or Experienced
     },
 
+    'EmployerSize': {
+        '2-10 employees': 1,
+        '11-50 employees': 2,
+        '51-200 employees': 3,
+        '201-500 employees': 4,
+        '501-1,000 employees': 5,
+        '1,001-5,000 employees': 6,
+        '5,001-10,000 employees': 7,
+        'More than 10,000 employees': 8,
+        'Not sure': 8, // Highest probability is More than 10,000
+        'Prefer not to disclose': 8 // Highest probability is More than 10,000
+    },
+
     'CurrentJobRole': {
         'ServiceNow Developer/Programmer': 'ServiceNow Developer/Programmer',
         'Solutions Architect': 'Architect',
@@ -77,6 +90,15 @@ var valueMaps = {
         'Prefer not to disclose': 1 // Assume lowest possible if no response
     },
 
+    'FrequencyCoarse': {
+        'Always': 5,
+        'Often': 4,
+        'Sometimes': 3,
+        'Rarely': 2,
+        'Never': 1,
+        'Prefer not to disclose': 1 // Assume lowest possible if no response
+    },
+
     'AgreeDisagree': {
         'Strongly Agree': 5,
         'Agree': 4,
@@ -93,6 +115,15 @@ var valueMaps = {
         'Prefer not to disclose': 3, // Assume neutral for these question types
         'Dissatisfied': 2,
         'Very dissatisfied': 1
+    },
+
+    'Importance': {
+        'Extremely important': 5,
+        'Very important': 4,
+        'Moderately important': 3,
+        'Slightly important': 2,
+        'Not at all important': 1,
+        'Prefer not to disclose': 3 // Assume neutral for these question types
     },
 
     'FieldOfStudy': {

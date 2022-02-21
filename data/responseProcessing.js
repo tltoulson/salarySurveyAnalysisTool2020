@@ -122,69 +122,19 @@ function removeNonNumericTargetValues(responses, property, removeZero) {
 // When a numeric continuous field is a NaN value, replace it with the median value of the responding population
 function inferNumericNanValuesAsMedian(responses) {
     return responses.map(function(response) {
-        var property = 'Years of Experience - Total Continuous';
-        if (isNaN(response[property])) {
-            response[property] = 9;
-        }
-
-        property = 'Years of Experience - IT Continuous';
-        if (isNaN(response[property])) {
-            response[property] = 8;
-        }
-
-        property = 'Years of Experience - Non-IT Continuous';
-        if (isNaN(response[property])) {
-            response[property] = 0;
-        }
-
-        property = 'Years of Experience - Non-IT Continuous';
-        if (isNaN(response[property])) {
-            response[property] = 0;
-        }
-
-        property = 'Years of Experience - ServiceNow Continuous';
+        var property = 'ServiceNow Experience';
         if (isNaN(response[property])) {
             response[property] = 5;
         }
 
-        property = 'Years of Experience - Current Employer Continuous';
+        var property = 'IT Experience';
         if (isNaN(response[property])) {
-            response[property] = 2;
+            response[property] = 10;
         }
 
-        property = 'Years of Experience - Current Role Continuous';
+        var property = 'Total Experience';
         if (isNaN(response[property])) {
-            response[property] = 2;
-        }
-
-        property = 'Number of Different Employers Continuous';
-        if (isNaN(response[property])) {
-            response[property] = 3;
-        }
-
-        property = 'Remote Work Percent Continuous';
-        if (isNaN(response[property])) {
-            response[property] = 40;
-        }
-
-        property = 'Hours Worked Per Day Continuous';
-        if (isNaN(response[property])) {
-            response[property] = 9;
-        }
-
-        property = 'Days Worked This Year Continuous';
-        if (isNaN(response[property])) {
-            response[property] = 243;
-        }
-
-        property = 'Years of Military Service Continuous';
-        if (isNaN(response[property])) {
-            response[property] = 0; // Not median in this case, substituted the most likely value since these individuals were not veterans
-        }
-
-        property = 'Total Hours Worked This Year Continuous';
-        if (isNaN(response[property])) {
-            response[property] = 2070;
+            response[property] = 11;
         }
 
         return response;
@@ -194,8 +144,8 @@ function inferNumericNanValuesAsMedian(responses) {
 
 function getProcessedResponses(responseInput) {
     var processedResponses = responseInput;
-    processedResponses = addTotalHoursWorked(processedResponses);
-    processedResponses = addNonItExperience(processedResponses);
+    //processedResponses = addTotalHoursWorked(processedResponses);
+    //processedResponses = addNonItExperience(processedResponses);
     processedResponses = addComputedProperties(processedResponses);
     processedResponses = inferNumericNanValuesAsMedian(processedResponses);
     processedResponses = addContinuousCalculatedProperties(processedResponses, config.continuousFields);

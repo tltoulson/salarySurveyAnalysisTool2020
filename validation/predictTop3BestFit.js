@@ -1,5 +1,7 @@
 export { predictTop3BestFit }
 
+// Updated the model with the field names used in the 2021 survey
+// to test the 2020 model against 2021 data
 function getExp(response, field) {
     var yearsOfExperience = response[field];
 
@@ -40,8 +42,8 @@ function predictTop3BestFit(response) {
     var yearsOfExperience;
 
     if (response['Country is United States'] == 'Yes') {
-        yearsOfExperience = getExp(response, 'Years of Experience - ServiceNow');
-        if (response['Compensation - Percent Fixed Continuous > 85'] == 'Yes') {
+        yearsOfExperience = getExp(response, 'ServiceNow Experience');
+        if (response['Percent Salary > 0.85'] == 'Yes') {
             return (-1194.7 * Math.pow(yearsOfExperience, 2)) + (21463 * yearsOfExperience) + 53175;
         }
         else {
@@ -49,19 +51,19 @@ function predictTop3BestFit(response) {
         }
     }
     else if (response['Country is India'] == 'Yes') {
-        yearsOfExperience = getExp(response, 'Years of Experience - IT');
+        yearsOfExperience = getExp(response, 'IT Experience');
         return (-117.17 * Math.pow(yearsOfExperience, 2)) + (10096 * yearsOfExperience) - 710.51;
     }
     else if (response['Country is Australia'] == 'Yes') {
-        yearsOfExperience = getExp(response, 'Years of Experience - ServiceNow');
+        yearsOfExperience = getExp(response, 'ServiceNow Experience');
         return (-11329 * Math.pow(yearsOfExperience, 2)) + (144172 * yearsOfExperience) - 321820;
     }
     else if (response['Country is United Kingdom'] == 'Yes') {
-        yearsOfExperience = getExp(response, 'Years of Experience - Total');
+        yearsOfExperience = getExp(response, 'Total Experience');
         return (-39.47 * Math.pow(yearsOfExperience, 2)) + (3900 * yearsOfExperience) + 53424;
     }
     else if (response['Country is Canada'] == 'Yes') {
-        yearsOfExperience = getExp(response, 'Years of Experience - Total');
+        yearsOfExperience = getExp(response, 'Total Experience');
         return (-157.32 * Math.pow(yearsOfExperience, 2)) + (7145.4 * yearsOfExperience) + 44526;
     }
     else {
